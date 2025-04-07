@@ -11,11 +11,31 @@ def read_data(file_name, field):
     :param field: (str), field of a dict to return
     :return: (list, string),
     """
+
+    if field not in {"unordered_numbers", 'ordered_numbers', 'dna_sequence'}:
+        return None
     file_path = os.path.join(cwd_path, file_name)
+    with open(file_path, 'r') as json_file:
+        seq = json.load(json_file)
+
+    return seq(field)
+def linear_searching(seq, number):
+    count = 0
+    positions = []
+    index = 0
+
+    for i in seq:
+        if i == number:
+            count += 1
+            positions.append(index)
+            index += 1
+
 
 
 def main():
-    pass
+    file_name = 'sequential.json'
+    seq = read_data(file_name, field='unordered_number')
+    print(seq)
 
 
 if __name__ == '__main__':
